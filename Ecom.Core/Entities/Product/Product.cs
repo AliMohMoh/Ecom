@@ -11,9 +11,10 @@ public class Product : BaseEntity<Guid>
 {
     public string Name { get; set; } = default!;
     public string Description { get; set; } = default!;
-    public decimal Price { get; set; }
-    public virtual List<Photo> Photos { get; set; } = new List<Photo>();
+    public decimal NewPrice { get; set; }
+    public decimal OldPrice { get; set; }
+    public virtual List<Photo> Photos { get; set; } 
     [ForeignKey(nameof(CategoryId))]
-    public virtual Category Category { get; set; } = default!;
+    public virtual Category Category { get; set; }
     public Guid CategoryId { get; set; }
 }

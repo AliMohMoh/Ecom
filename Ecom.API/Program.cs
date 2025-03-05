@@ -10,11 +10,11 @@ namespace Ecom.API
 
             // Add services to the container.
 
+            builder.Services.InfrastructureConfiguration(builder.Configuration);
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.InfrastructureConfiguration(builder.Configuration);
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
@@ -30,7 +30,7 @@ namespace Ecom.API
 
             app.UseAuthorization();
 
-
+            app.UseStaticFiles();
             app.MapControllers();
 
             app.Run();
