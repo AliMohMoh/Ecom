@@ -19,6 +19,19 @@ namespace Ecom.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            // CORS configuration
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CORSPolicy",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200", "https://localhost:4200")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,6 +42,8 @@ namespace Ecom.API
             }
 
             app.UseHttpsRedirection();
+            // Enable CORS
+            app.UseCors("CORSPolicy");
 
             app.UseAuthorization();
 
