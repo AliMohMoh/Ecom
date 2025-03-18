@@ -24,7 +24,8 @@ public class GenericRepositry<TEntity> : IGenericRepositry<TEntity> where TEntit
         await _context.Set<TEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
     }
-
+    public async Task<int> CountAsync()
+      => await _context.Set<TEntity>().CountAsync();
     public async Task DeleteAsync(Guid id)
     {
         var entity = await _context.Set<TEntity>().FindAsync(id);

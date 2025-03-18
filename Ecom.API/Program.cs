@@ -1,3 +1,4 @@
+using Ecom.API.Middleware;
 using Ecom.Infrastructure;
 
 namespace Ecom.API
@@ -11,6 +12,7 @@ namespace Ecom.API
             // Add services to the container.
 
             builder.Services.InfrastructureConfiguration(builder.Configuration);
+            builder.Services.AddMemoryCache();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +31,9 @@ namespace Ecom.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            // Custom exception handling middleware
+            app.UseMiddleware<ExceptionsMiddleware>();
 
             app.UseStaticFiles();
             app.MapControllers();
